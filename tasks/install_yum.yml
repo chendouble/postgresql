@@ -8,6 +8,13 @@
         yum:
           name: ["ca-certificates","python-psycopg2", "python-pycurl", "glibc-common","epel-release","libselinux-python"]
           state: present
+        when:
+          - ansible_distribution != "OracleLinux"
+          
+        yum:
+          name: ["ca-certificates","python-psycopg2", "python-pycurl", "glibc-common","oracle-epel-release-el7","libselinux-python"]
+          state: present
+        when: ansible_distribution == "OracleLinux"
 
       - name: PostgreSQL | Add PostgreSQL repository | yum
         yum_repository:
